@@ -6,20 +6,20 @@ import java.util.concurrent.ConcurrentHashMap;
 /** @author KIUSBT(RiShengLuo) */
 public class ParseClient extends MemoryStream
 {
-	private boolean cflag; // true:¥¿¦bµn¤J¦øªA¾¹,false:¥¿¦b¹CÀ¸¦øªA¾¹
+	private boolean cflag; // true:æ­£åœ¨ç™»å…¥ä¼ºæœå™¨,false:æ­£åœ¨éŠæˆ²ä¼ºæœå™¨
 	private ParseServer ps;
 	
 	/**
-	 * «Ê¥]¦ì§}²M³æ
-	 * String, «Ê¥]-¦WºÙ
-	 * Variable, «Ê¥]-¼È¦s¾¹
+	 * å°åŒ…ä½å€æ¸…å–®
+	 * String, å°åŒ…-åç¨±
+	 * Variable, å°åŒ…-æš«å­˜å™¨
 	 */
 	private final ConcurrentHashMap<String, Variable> addr;
 	
 	/**
-	 * °Ñ¼Æ²M³æ
-	 * Long, ÄdºI¨ìªº®É¶¡ (¨t²Î®É¶¡)
-	 * ArrayList<byte[]>, °Ñ¦Ò¸ê®Æ-¼È¦s¾¹
+	 * åƒæ•¸æ¸…å–®
+	 * Long, æ””æˆªåˆ°çš„æ™‚é–“ (ç³»çµ±æ™‚é–“)
+	 * ArrayList<byte[]>, åƒè€ƒè³‡æ–™-æš«å­˜å™¨
 	 */
 	private final ConcurrentHashMap<Long, ArrayList<byte[]>> ref;
 	
@@ -41,18 +41,18 @@ public class ParseClient extends MemoryStream
 			String note = new String();
 			
 			if (query("C_OPCODE_CLIENTVERSION", name) && data.length == 12)
-				note = "«È¤áºİª©¥»«Ê¥]";
+				note = "å®¢æˆ¶ç«¯ç‰ˆæœ¬å°åŒ…";
 			else if (query("C_OPCODE_LOGINPACKET", name))
-				note = "¥Î¤áµn¿ı«Ê¥]";
+				note = "ç”¨æˆ¶ç™»éŒ„å°åŒ…";
 			else if (query("C_OPCODE_COMMONCLICK", name) && 
 					 ps.query("S_OPCODE_COMMONNEWS", ""))
-				note = "¤½§i½T»{«Ê¥]";
+				note = "å…¬å‘Šç¢ºèªå°åŒ…";
 			else if (query("C_OPCODE_NEWCHAR", name))
-				note = "³Ğ³y¨¤¦â«Ê¥]";
+				note = "å‰µé€ è§’è‰²å°åŒ…";
 			else if (query("C_OPCODE_DELETECHAR", name))
-				note = "§R°£¨¤¦â«Ê¥]";
+				note = "åˆªé™¤è§’è‰²å°åŒ…";
 			else if (query("C_OPCODE_LOGINTOSERVER", name))
-				note = "µn¿ı¹CÀ¸«Ê¥]";
+				note = "ç™»éŒ„éŠæˆ²å°åŒ…";
 			
 			insert(name, address, note); 
 		}

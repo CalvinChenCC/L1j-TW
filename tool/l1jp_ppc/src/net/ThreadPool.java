@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 /** @author KIUSBT */
 public class ThreadPool
 {
-	private static Executor e = Executors.newCachedThreadPool(); // «Ø¥ß½uµ{¦À
+	private static Executor e = Executors.newCachedThreadPool(); // å»ºç«‹ç·šç¨‹æ± 
 
 	/**
 	 * @param command

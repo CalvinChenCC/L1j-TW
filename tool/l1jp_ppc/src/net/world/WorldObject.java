@@ -3,26 +3,26 @@ package net.world;
 /** @author KIUSBT */
 public class WorldObject
 {
-	private int id; // ª«¥ó¥N¸¹
-	private int x, y, mapid; // ª«¥ó®y¼Ğ¡B¦a¹Ï
-	private int Gfxid; // ª«¥ó¥~«¬
-	private int Actid; // ª«¥ó°Ê§@
-	private int Dir; // ª«¥ó¤è¦V
-	private int Light; // ª«¥ó©P³ò«G«×
-	private int Haste; // ª«¥ó¥[³t®ÄªG
-	private int Exp; // ª«¥ó¸gÅç­È
-	private int Lawful;	// ª«¥ó¥¿¸q­È
-	private String Name; // ª«¥ó¦WºÙ
-	private String Title; // ª«¥ó«Ê¸¹
-	private int Attr; // ª«¥óÄİ©Ê
-	private int Clanid; // ª«¥ó¦å·ù¥N¸¹
-	private String Clan; // ª«¥ó¦å·ù¦WºÙ
-	private String Master; // ª«¥ó¥D¤H
-	private int State; // ª«¥óª¬ºA
-	private int Hpbar; // ª«¥ó¦å±ø
-	private int Wave; // ®ü®öµ{«×
-	private int Level; // ª«¥óµ¥¯Å
-	private String Shop; // °Ó©±¦WºÙ
+	private int id; // ç‰©ä»¶ä»£è™Ÿ
+	private int x, y, mapid; // ç‰©ä»¶åº§æ¨™ã€åœ°åœ–
+	private int Gfxid; // ç‰©ä»¶å¤–å‹
+	private int Actid; // ç‰©ä»¶å‹•ä½œ
+	private int Dir; // ç‰©ä»¶æ–¹å‘
+	private int Light; // ç‰©ä»¶å‘¨åœäº®åº¦
+	private int Haste; // ç‰©ä»¶åŠ é€Ÿæ•ˆæœ
+	private int Exp; // ç‰©ä»¶ç¶“é©—å€¼
+	private int Lawful;	// ç‰©ä»¶æ­£ç¾©å€¼
+	private String Name; // ç‰©ä»¶åç¨±
+	private String Title; // ç‰©ä»¶å°è™Ÿ
+	private int Attr; // ç‰©ä»¶å±¬æ€§
+	private int Clanid; // ç‰©ä»¶è¡€ç›Ÿä»£è™Ÿ
+	private String Clan; // ç‰©ä»¶è¡€ç›Ÿåç¨±
+	private String Master; // ç‰©ä»¶ä¸»äºº
+	private int State; // ç‰©ä»¶ç‹€æ…‹
+	private int Hpbar; // ç‰©ä»¶è¡€æ¢
+	private int Wave; // æµ·æµªç¨‹åº¦
+	private int Level; // ç‰©ä»¶ç­‰ç´š
+	private String Shop; // å•†åº—åç¨±
 	
 	/**
 	 * @return the id

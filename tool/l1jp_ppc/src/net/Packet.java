@@ -98,7 +98,7 @@ public class Packet
 		synchronized (lock)
 		{
 			String Message = "";
-			Message += "¡i" + from + "¡j id:" + (data[0] & 0xFF) + " size:" + data.length + " time:" + System.currentTimeMillis() + "\r\n";
+			Message += "î“¯" + from + "î“° id:" + (data[0] & 0xFF) + " size:" + data.length + " time:" + System.currentTimeMillis() + "\r\n";
 			Message += Packet.Show(data) + "\r\n";
 			System.out.print(Message);
 			

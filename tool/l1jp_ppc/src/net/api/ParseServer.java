@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * µn¤J¡B¹CÀ¸¦øªA¾¹«Ê¥]¸ÑªR¾¹ (l1jp_ppc)
+ * ç™»å…¥ã€éŠæˆ²ä¼ºæœå™¨å°åŒ…è§£æå™¨ (l1jp_ppc)
  * 
  * @author KIUSBT(RiShengLuo)
  */
 public class ParseServer extends MemoryStream
 {
-	private boolean sflag; // true:¥¿¦bµn¤J¦øªA¾¹,false:¥¿¦b¹CÀ¸¦øªA¾¹
+	private boolean sflag; // true:æ­£åœ¨ç™»å…¥ä¼ºæœå™¨,false:æ­£åœ¨éŠæˆ²ä¼ºæœå™¨
 	private ParseClient pc;
 	
 	/**
-	 * «Ê¥]¦ì§}²M³æ
-	 * String, «Ê¥]-¦WºÙ
-	 * Variable, «Ê¥]-¼È¦s¾¹
+	 * å°åŒ…ä½å€æ¸…å–®
+	 * String, å°åŒ…-åç¨±
+	 * Variable, å°åŒ…-æš«å­˜å™¨
 	 */
 	private final ConcurrentHashMap<String, Variable> addr;
 	
 	/**
-	 * °Ñ¼Æ²M³æ
-	 * Long, ÄdºI¨ìªº®É¶¡ (¨t²Î®É¶¡)
-	 * ArrayList<byte[]>, °Ñ¦Ò¸ê®Æ-¼È¦s¾¹
+	 * åƒæ•¸æ¸…å–®
+	 * Long, æ””æˆªåˆ°çš„æ™‚é–“ (ç³»çµ±æ™‚é–“)
+	 * ArrayList<byte[]>, åƒè€ƒè³‡æ–™-æš«å­˜å™¨
 	 */
 	private final ConcurrentHashMap<Long, ArrayList<byte[]>> ref;
 	
@@ -46,26 +46,26 @@ public class ParseServer extends MemoryStream
 			String name = new String();
 			
 			if (query("S_OPCODE_INITPACKET", name))
-				insert(name, address, "ªì©l¤Æ«Ê¥]"); 
+				insert(name, address, "åˆå§‹åŒ–å°åŒ…"); 
 			
 			else if (query("S_OPCODE_SERVERVERSION", name) &&
 					 pc.query("C_OPCODE_CLIENTVERSION", ""))
-				insert(name, address, "¦øªA¾¹¸ê°T«Ê¥] (¦øªA¾¹ª©¥»«Ê¥])"); 
+				insert(name, address, "ä¼ºæœå™¨è³‡è¨Šå°åŒ… (ä¼ºæœå™¨ç‰ˆæœ¬å°åŒ…)"); 
 			
-			// ¥xª©¨S¦³¦¹¥\¯à
+			// å°ç‰ˆæ²’æœ‰æ­¤åŠŸèƒ½
 			else if (query("S_OPCODE_CHANGEPASSWORD", name) &&
 					 pc.query("C_OPCODE_CHANGEPASSWORD", ""))
-				insert(name, address, "ÅÜ§ó±K½X§¹¦¨«Ê¥]");
+				insert(name, address, "è®Šæ›´å¯†ç¢¼å®Œæˆå°åŒ…");
 			
 			else if (query("S_OPCODE_LOGINRESULT", name) &&
 					 pc.query("C_OPCODE_LOGINPACKET", ""))
-				insert(name, address, "µn¿ı¦øªA¾¹«Ê¥]");
+				insert(name, address, "ç™»éŒ„ä¼ºæœå™¨å°åŒ…");
 			
 			else if (query("S_OPCODE_CHARAMOUNT", name))
-				insert(name, address, "¨¤¦â¼Æ¶q«Ê¥]");
+				insert(name, address, "è§’è‰²æ•¸é‡å°åŒ…");
 			
 			else if (query("S_OPCODE_CHARRESET", name))
-				insert(name, address, "ÂI¼Æ­«¸m«Ê¥]");
+				insert(name, address, "é»æ•¸é‡ç½®å°åŒ…");
 			
 			else if (query("S_OPCODE_NEWCHARWRONG", name) &&
 					 pc.query("C_OPCODE_NEWCHAR", ""))
@@ -73,12 +73,12 @@ public class ParseServer extends MemoryStream
 				param8 = readByte();
 				
 				if (param8 == 0x02)
-					insert(name, address, "³Ğ³y¨¤¦â«Ê¥]");
+					insert(name, address, "å‰µé€ è§’è‰²å°åŒ…");
 			}
 			
 			else if (query("S_OPCODE_NEWCHARPACK", name) &&
 					 query("S_OPCODE_NEWCHARWRONG", ""))
-				insert(name, address, "¥[¤J·s¨¤¦â«Ê¥]");
+				insert(name, address, "åŠ å…¥æ–°è§’è‰²å°åŒ…");
 			
 			else if (query("S_OPCODE_DETELECHAROK", name) &&
 					 pc.query("C_OPCODE_DELETECHAR", "") &&
@@ -87,12 +87,12 @@ public class ParseServer extends MemoryStream
 				param8 = readByte();
 				
 				if (param8 == 0x05 || param8 == 0x51)
-					insert(name, address, "§R°£¨¤¦â«Ê¥]");
+					insert(name, address, "åˆªé™¤è§’è‰²å°åŒ…");
 			}
 			
 			else if (query("S_OPCODE_UNKNOWN1", name) &&
 					 pc.query("C_OPCODE_LOGINTOSERVER", ""))
-				insert(name, address, "µn¿ı¹CÀ¸«Ê¥]", (sflag = !sflag));
+				insert(name, address, "ç™»éŒ„éŠæˆ²å°åŒ…", (sflag = !sflag));
 			
 		}
 		else

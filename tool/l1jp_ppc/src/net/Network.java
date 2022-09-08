@@ -11,7 +11,7 @@ import java.net.Socket;
 
 import net.world.World;
 
-/* 2011/2/22§ó·s */
+/* 2011/2/22æ›´æ–° */
 /** @author KIUSBT(Ri Sheng) */
 public class Network
 {
@@ -24,10 +24,10 @@ public class Network
 	private Cipher sc, c;
 	
 	/** 
-	 * ªì©l¤Æ³sµ²¤u§@
+	 * åˆå§‹åŒ–é€£çµå·¥ä½œ
 	 * 
-	 * @throws socket, 	ªA°Èºİ
-	 * @throws csocket,	«È¤áºİ
+	 * @throws socket, 	æœå‹™ç«¯
+	 * @throws csocket,	å®¢æˆ¶ç«¯
 	 */
 	public Network(Socket socket, Socket csocket) throws IOException
 	{
@@ -52,53 +52,53 @@ public class Network
 		cos.write(data);
 		cos.flush();
 		
-		// ªì©l¤Æ«Ê¥]¦ì§}
+		// åˆå§‹åŒ–å°åŒ…ä½å€
 		int address = data[2] & 0xff;
 		
-		// ¨ú±oª÷Æ_°Í
+		// å–å¾—é‡‘é‘°åŒ™
 		int keycrypt =  ((data[6] & 0xFF) << 24) |
 						((data[5] & 0xFF) << 16) |
 						((data[4] & 0xFF) <<  8) |
 						((data[3] & 0xFF));
 		
-		sc = new Cipher(keycrypt); // ªì©l¤Æºtºâªk (ªA°Èºİ)
-		c = new Cipher(keycrypt); // ªì©l¤Æºtºâªk («È¤áºİ)
+		sc = new Cipher(keycrypt); // åˆå§‹åŒ–æ¼”ç®—æ³• (æœå‹™ç«¯)
+		c = new Cipher(keycrypt); // åˆå§‹åŒ–æ¼”ç®—æ³• (å®¢æˆ¶ç«¯)
 	}
 	
 	/**
-	 * <b>«È¤áºİ</b> ¤U¤@­Ó¦ì¤¸²Õ°}¦C («Ê¥])
+	 * <b>å®¢æˆ¶ç«¯</b> ä¸‹ä¸€å€‹ä½å…ƒçµ„é™£åˆ— (å°åŒ…)
 	 * 
-	 * @return ¦ì¤¸²Õ°}¦C
+	 * @return ä½å…ƒçµ„é™£åˆ—
 	 */
 	public byte[] nextCBytes() throws IOException
 	{
-		byte[] data; // ¸ê®Æ¼È¦s¾¹
-		int highByte, lowByte; // °ª¦ì¤¸²Õ¡B§C¦ì¤¸²Õ
+		byte[] data; // è³‡æ–™æš«å­˜å™¨
+		int highByte, lowByte; // é«˜ä½å…ƒçµ„ã€ä½ä½å…ƒçµ„
 		
 		try
 		{
-			highByte 	= cis.read(); // ±µ¦¬¦ì¤¸²Õ (8 bit)
-			lowByte		= cis.read(); // ±µ¦¬¦ì¤¸²Õ (8 bit)
+			highByte 	= cis.read(); // æ¥æ”¶ä½å…ƒçµ„ (8 bit)
+			lowByte		= cis.read(); // æ¥æ”¶ä½å…ƒçµ„ (8 bit)
 			
-			// ÀË´ú³sµ²¬O§_¥¿±` (1)
+			// æª¢æ¸¬é€£çµæ˜¯å¦æ­£å¸¸ (1)
 			if (highByte == -1 || lowByte == -1)
-				throw new IOException(getLocalAddress() + " »PªA°Èºİ¤¤Â_³s½u¡I");
+				throw new IOException(getLocalAddress() + " èˆ‡æœå‹™ç«¯ä¸­æ–·é€£ç·šï¼");
 			
-			// ³]©w±µ¦¬¨ìªº¸ê®Æ«Ê¥]¤j¤p
+			// è¨­å®šæ¥æ”¶åˆ°çš„è³‡æ–™å°åŒ…å¤§å°
 			data = new byte[(((lowByte & 0xFF) << 8) | (highByte & 0xFF)) - 2];
 			
-			// ÀË´ú³sµ²¬O§_¥¿±` (2)
+			// æª¢æ¸¬é€£çµæ˜¯å¦æ­£å¸¸ (2)
 			for (int i = 0; i < data.length; i++)
 			{
 				int check = cis.read();
 				
 				if (check == -1)
-					throw new IOException(getLocalAddress() + " »PªA°Èºİ¸ê®Æ¶Ç¿éµo¥Í¿ù»~¡I");
+					throw new IOException(getLocalAddress() + " èˆ‡æœå‹™ç«¯è³‡æ–™å‚³è¼¸ç™¼ç”ŸéŒ¯èª¤ï¼");
 				
 				data[i] = (byte) (check & 0xFF);
 			}
 			
-			return c.decrypt(data); // ¶Ç¦^¸Ñ½Xªº¸ê®Æ«Ê¥]
+			return c.decrypt(data); // å‚³å›è§£ç¢¼çš„è³‡æ–™å°åŒ…
 		}
 		catch (IOException e)
 		{
@@ -111,39 +111,39 @@ public class Network
 	}
 	
 	/**
-	 * <b>ªA°Èºİ</b> ¤U¤@­Ó¦ì¤¸²Õ°}¦C («Ê¥])
+	 * <b>æœå‹™ç«¯</b> ä¸‹ä¸€å€‹ä½å…ƒçµ„é™£åˆ— (å°åŒ…)
 	 * 
-	 * @return ¦ì¤¸²Õ°}¦C
+	 * @return ä½å…ƒçµ„é™£åˆ—
 	 */
 	public byte[] nextSBytes() throws IOException
 	{
-		byte[] data; // ¸ê®Æ¼È¦s¾¹
-		int highByte, lowByte; // °ª¦ì¤¸²Õ¡B§C¦ì¤¸²Õ
+		byte[] data; // è³‡æ–™æš«å­˜å™¨
+		int highByte, lowByte; // é«˜ä½å…ƒçµ„ã€ä½ä½å…ƒçµ„
 		
 		try
 		{
-			highByte 	= sis.read(); // ±µ¦¬¦ì¤¸²Õ (8 bit)
-			lowByte		= sis.read(); // ±µ¦¬¦ì¤¸²Õ (8 bit)
+			highByte 	= sis.read(); // æ¥æ”¶ä½å…ƒçµ„ (8 bit)
+			lowByte		= sis.read(); // æ¥æ”¶ä½å…ƒçµ„ (8 bit)
 			
-			// ÀË´ú³sµ²¬O§_¥¿±` (1)
+			// æª¢æ¸¬é€£çµæ˜¯å¦æ­£å¸¸ (1)
 			if (highByte == -1 || lowByte == -1)
-				throw new IOException("ªA°Èºİ»P " + getLocalAddress() + " ¤¤Â_³s½u¡I");
+				throw new IOException("æœå‹™ç«¯èˆ‡ " + getLocalAddress() + " ä¸­æ–·é€£ç·šï¼");
 			
-			// ³]©w±µ¦¬¨ìªº¸ê®Æ«Ê¥]¤j¤p
+			// è¨­å®šæ¥æ”¶åˆ°çš„è³‡æ–™å°åŒ…å¤§å°
 			data = new byte[((lowByte * 256) | highByte) - 2];
 			
-			// ÀË´ú³sµ²¬O§_¥¿±` (2)
+			// æª¢æ¸¬é€£çµæ˜¯å¦æ­£å¸¸ (2)
 			for (int i = 0; i < data.length; i++)
 			{
 				int check = sis.read();
 				
 				if (check == -1)
-					throw new IOException("ªA°Èºİ»P±z¸ê®Æ¶Ç¿éµo¥Í¿ù»~¡I");
+					throw new IOException("æœå‹™ç«¯èˆ‡æ‚¨è³‡æ–™å‚³è¼¸ç™¼ç”ŸéŒ¯èª¤ï¼");
 				
 				data[i] = (byte) (check & 0xFF);
 			}
 			
-			return sc.decrypt(data); // ¶Ç¦^¸Ñ½Xªº¸ê®Æ«Ê¥]
+			return sc.decrypt(data); // å‚³å›è§£ç¢¼çš„è³‡æ–™å°åŒ…
 		}
 		catch (IOException e)
 		{
@@ -156,8 +156,8 @@ public class Network
 	}
 	
 	/**
-	 * [ªA°Èºİ] ¿é¥X¦ì¤¸²Õ°}¦C («Ê¥])<br>
-	 *  ªA°Èºİ -> «È¤áºİ µo°e
+	 * [æœå‹™ç«¯] è¼¸å‡ºä½å…ƒçµ„é™£åˆ— (å°åŒ…)<br>
+	 *  æœå‹™ç«¯ -> å®¢æˆ¶ç«¯ ç™¼é€
 	 * 
 	 * @param data
 	 */
@@ -170,7 +170,7 @@ public class Network
 				int length = data.length + 2;
 				
 				if (length < 4)
-					throw new Exception("¿é¥Xªº°}¦Cªø«×¤p©ó4¡I");
+					throw new Exception("è¼¸å‡ºçš„é™£åˆ—é•·åº¦å°æ–¼4ï¼");
 				
 				cos.write(length & 0xFF);
 				cos.write(length >> 8 & 0xFF);
@@ -184,8 +184,8 @@ public class Network
 	}
 	
 	/**
-	 * [«È¤áºİ] ¿é¥X¦ì¤¸²Õ°}¦C («Ê¥])<br>
-	 *  «È¤áºİ -> ªA°Èºİ µo°e
+	 * [å®¢æˆ¶ç«¯] è¼¸å‡ºä½å…ƒçµ„é™£åˆ— (å°åŒ…)<br>
+	 *  å®¢æˆ¶ç«¯ -> æœå‹™ç«¯ ç™¼é€
 	 * 
 	 * @param data
 	 */
@@ -198,7 +198,7 @@ public class Network
 				int length = data.length + 2;
 				
 				if (length < 4)
-					throw new Exception("¿é¥Xªº°}¦Cªø«×¤p©ó4¡I");
+					throw new Exception("è¼¸å‡ºçš„é™£åˆ—é•·åº¦å°æ–¼4ï¼");
 				
 				sos.write(length & 0xFF);
 				sos.write(length >> 8 & 0xFF);
@@ -215,7 +215,7 @@ public class Network
 	{
 		if (!isClosed())
 		{
-			System.out.println(getLocalAddress() + " ¤wÂ÷¶}ºÊÅ¥µ{§Ç¡I");
+			System.out.println(getLocalAddress() + " å·²é›¢é–‹ç›£è½ç¨‹åºï¼");
 			world.delNetwork();
 		}
 		

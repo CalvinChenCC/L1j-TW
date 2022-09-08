@@ -20,11 +20,11 @@ package net.api;
 
 public class Variable
 {
-	/** «Ê¥]¦WºÙ */
+	/** å°åŒ…åç¨± */
 	private String name;
-	/** «Ê¥]¦ì§} */ 	
+	/** å°åŒ…ä½å€ */ 	
 	private int address;
-	/** «Ê¥]µù¸Ñ */
+	/** å°åŒ…è¨»è§£ */
 	private String note; 	
 	
 	/** @param name the name to set */

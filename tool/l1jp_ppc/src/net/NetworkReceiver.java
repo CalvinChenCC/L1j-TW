@@ -12,17 +12,17 @@ public class NetworkReceiver
 	private final Network net;
 	
 	/**
-	 * ªì©l¤Æ³sµ²¤u§@¤§±µ¦¬ªÌ
+	 * åˆå§‹åŒ–é€£çµå·¥ä½œä¹‹æ¥æ”¶è€…
 	 */
 	public NetworkReceiver(Network net)
 	{
-		this.net = net; // ¨ú±o³sµ²¤u§@
+		this.net = net; // å–å¾—é€£çµå·¥ä½œ
 		
-		ThreadPool.execute(new client()); // ¶}©l±µ¦¬«È¤áºİ«Ê¥]
-		ThreadPool.execute(new server()); // ¶}©l±µ¦¬ªA°Èºİ«Ê¥]
+		ThreadPool.execute(new client()); // é–‹å§‹æ¥æ”¶å®¢æˆ¶ç«¯å°åŒ…
+		ThreadPool.execute(new server()); // é–‹å§‹æ¥æ”¶æœå‹™ç«¯å°åŒ…
 	}
 	
-	// «È¤áºİ«Ê¥]±µ¦¬ªÌ
+	// å®¢æˆ¶ç«¯å°åŒ…æ¥æ”¶è€…
 	private class client implements Runnable
 	{
 		@Override
@@ -32,7 +32,7 @@ public class NetworkReceiver
 			{
 				byte[] data;
 				
-				/* µ¥«İ·sªº«Ê¥] */
+				/* ç­‰å¾…æ–°çš„å°åŒ… */
 				try
 				{
 					data = net.nextCBytes();
@@ -44,7 +44,7 @@ public class NetworkReceiver
 				
 				Packet.show("Client", data);
 				
-				/* ±N·s«Ê¥]¿é¥X */
+				/* å°‡æ–°å°åŒ…è¼¸å‡º */
 				net.outputCBytes(data);
 			}
 			
@@ -52,7 +52,7 @@ public class NetworkReceiver
 		}
 	}
 	
-	// ªA°Èºİ«Ê¥]±µ¦¬ªÌ
+	// æœå‹™ç«¯å°åŒ…æ¥æ”¶è€…
 	private class server implements Runnable
 	{
 		@Override
@@ -62,7 +62,7 @@ public class NetworkReceiver
 			{
 				byte[] data;
 				
-				/* µ¥«İ·sªº«Ê¥] */
+				/* ç­‰å¾…æ–°çš„å°åŒ… */
 				try
 				{
 					data = net.nextSBytes();
@@ -77,7 +77,7 @@ public class NetworkReceiver
 				
 				Packet.show("Server", data);
 				
-				/* ±N·s«Ê¥]¿é¥X */
+				/* å°‡æ–°å°åŒ…è¼¸å‡º */
 				net.outputSBytes(data);
 			}
 			

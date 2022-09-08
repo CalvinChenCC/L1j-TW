@@ -13,7 +13,7 @@ public class Listener extends Thread
 	public static String Host;
 	public static int Port;
 	
-	/* «Ê¥]¿ëÃÑµ{§Ç»İ­n¨Ï¥Îªº°Ñ¼Æ */
+	/* å°åŒ…è¾¨è­˜ç¨‹åºéœ€è¦ä½¿ç”¨çš„åƒæ•¸ */
 	public static String UserName;
 	public static String Password;
 	
@@ -21,7 +21,7 @@ public class Listener extends Thread
 	public static final boolean NoDelay = true;
 	
 	/**
-	 * ·í¦¹µ{§Ç³Q¹B¦æ®É
+	 * ç•¶æ­¤ç¨‹åºè¢«é‹è¡Œæ™‚
 	 * 
 	 * @param args
 	 */
@@ -34,10 +34,10 @@ public class Listener extends Thread
 		try
 		{
 			p = new Properties();
-			is = new FileInputStream("./Config.ini"); // ªì©l¤Æ¿é¥X¶×¬y±Æ
-			p.load(is); // Åª¨ú³]©w³]©wÀÉ
-			Host = p.getProperty("host"); // ¨ú±o¥Ø¼Ğ¥D¾÷¦WºÙ
-			Port = Integer.parseInt(p.getProperty("port")); // ¨ú±o¥Ø¼Ğ¥D¾÷ºİ¤f
+			is = new FileInputStream("./Config.ini"); // åˆå§‹åŒ–è¼¸å‡ºåŒ¯æµæ’
+			p.load(is); // è®€å–è¨­å®šè¨­å®šæª”
+			Host = p.getProperty("host"); // å–å¾—ç›®æ¨™ä¸»æ©Ÿåç¨±
+			Port = Integer.parseInt(p.getProperty("port")); // å–å¾—ç›®æ¨™ä¸»æ©Ÿç«¯å£
 			
 			ip4 = InetAddress.getByName(p.getProperty("convert")).getAddress();
 			
@@ -51,57 +51,57 @@ public class Listener extends Thread
 		}
 		finally
 		{
-			is.close(); // Ãö³¬¿é¤J¶×¬y±Æ
-			is = null;  // ±Nª«¥ó³]¬°ªÅ
-			p.clear();	// ±N³Qµn¿ıªº¸ê®Æ²MªÅ
-			p = null;	// ±Nª«¥ó³]¬°ªÅ
+			is.close(); // é—œé–‰è¼¸å…¥åŒ¯æµæ’
+			is = null;  // å°‡ç‰©ä»¶è¨­ç‚ºç©º
+			p.clear();	// å°‡è¢«ç™»éŒ„çš„è³‡æ–™æ¸…ç©º
+			p = null;	// å°‡ç‰©ä»¶è¨­ç‚ºç©º
 		}
 		
 		int ip =((ip4[0] & 0xFF) << 24) |
 				((ip4[1] & 0xFF) << 16) |
 				((ip4[2] & 0xFF) <<  8) |
 				((ip4[3] & 0xFF));
-		System.out.println(Listener.class.getName() + " Âà´«¹LªºIP:" + ip);
-		System.out.println(Listener.class.getName() + "(2000)" + " ±Ò°Ê¦¨¥\¡I\r\n");
-		new Listener().start(); // ¶}©l¶i¦æºÊÅ¥§@·~
+		System.out.println(Listener.class.getName() + " è½‰æ›éçš„IP:" + ip);
+		System.out.println(Listener.class.getName() + "(2000)" + " å•Ÿå‹•æˆåŠŸï¼\r\n");
+		new Listener().start(); // é–‹å§‹é€²è¡Œç›£è½ä½œæ¥­
 	}
 	
-	private final ServerSocket serverSocket; // ¦øªA¾¹³q°Tºİ¤f
+	private final ServerSocket serverSocket; // ä¼ºæœå™¨é€šè¨Šç«¯å£
 	
 	public Listener() throws IOException
 	{
 		super("Linsten_Server");
 		
-		serverSocket = new ServerSocket(2000); // ¹w³]ºİ¤f2000
+		serverSocket = new ServerSocket(2000); // é è¨­ç«¯å£2000
 	}
 	
 	@Override
 	public void run()
 	{
-		System.out.println(Listener.class.getName() + "(2000)" + " ¶}©l¶i¦æºÊÅ¥§@·~¡C\r\n");
+		System.out.println(Listener.class.getName() + "(2000)" + " é–‹å§‹é€²è¡Œç›£è½ä½œæ¥­ã€‚\r\n");
 		
-		/* ¶}©lºÊÅ¥¨Ï¥ÎªÌ */
+		/* é–‹å§‹ç›£è½ä½¿ç”¨è€… */
 		while (true)
 		{
 			try
 			{
-				Socket csocket = serverSocket.accept(); // ±µ¨ü·sªº¨Ï¥ÎªÌ³s½u
-				Socket socket = new Socket(Host, Port); // »P¥Ø¼Ğ¥D¾÷«Ø¥ß³sµ²
+				Socket csocket = serverSocket.accept(); // æ¥å—æ–°çš„ä½¿ç”¨è€…é€£ç·š
+				Socket socket = new Socket(Host, Port); // èˆ‡ç›®æ¨™ä¸»æ©Ÿå»ºç«‹é€£çµ
 				
-				// ·sªº¨Ï¥ÎªÌ°Ñ¼Æ³]©w
+				// æ–°çš„ä½¿ç”¨è€…åƒæ•¸è¨­å®š
 				csocket.setTcpNoDelay(NoDelay);
 				csocket.setSendBufferSize(Size);
 				csocket.setReceiveBufferSize(Size);
-				// »P¦øªA¾¹ÁpÃ´¤§°Ñ¼Æ³]©w
+				// èˆ‡ä¼ºæœå™¨è¯ç¹«ä¹‹åƒæ•¸è¨­å®š
 				socket.setTcpNoDelay(NoDelay);
 				socket.setSendBufferSize(Size);
 				socket.setReceiveBufferSize(Size);
 				
-				// -- °T®§§iª¾ --
-				System.out.println(csocket.getInetAddress() + " ¤w³s±µºÊÅ¥¦øªA¾¹¡A¨Ã»P¦øªA¾¹«Ø¥ß³s½u¡C\r\n");
+				// -- è¨Šæ¯å‘ŠçŸ¥ --
+				System.out.println(csocket.getInetAddress() + " å·²é€£æ¥ç›£è½ä¼ºæœå™¨ï¼Œä¸¦èˆ‡ä¼ºæœå™¨å»ºç«‹é€£ç·šã€‚\r\n");
 				
-				// «Ø¥ß³sµ²¤u§@
-				new Network(socket, csocket); // ªì©l¤Æ³sµ²¤u§@
+				// å»ºç«‹é€£çµå·¥ä½œ
+				new Network(socket, csocket); // åˆå§‹åŒ–é€£çµå·¥ä½œ
 			}
 			catch (IOException e)
 			{

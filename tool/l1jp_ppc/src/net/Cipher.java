@@ -4,14 +4,14 @@ package net;
 //import net.util.ULong32;
 
 //public class LineageEncryption
-/* 2011/2/22§ó·s */
+/* 2011/2/22î°ç© */
 /** @author KIUSBT(Ri Sheng) */
 public class Cipher
 {
 	private final static int _1 = 0x9c30d539; // 32-bit password
 	private final static int _2 = 0x930fd7e2; // 32-bit password
 	private final static int _3 = 0x7c72e993; // 32-bit password
-	private final static int _4 = 0x287effc3; // 32-bit password (¶ñ¥R)
+	private final static int _4 = 0x287effc3; // 32-bit password (æ¶î™˜)
 
 	private final byte[] eb = new byte[8]; // 64-bit
 	private final byte[] db = new byte[8]; // 64-bit
